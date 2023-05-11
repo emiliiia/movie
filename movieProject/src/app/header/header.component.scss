@@ -1,0 +1,12 @@
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  font-family: 'Times New Roman', serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
+.flex-stretch {
+  flex: 1 0 auto;
+}

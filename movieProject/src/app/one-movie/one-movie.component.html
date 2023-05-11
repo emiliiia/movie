@@ -1,0 +1,2 @@
+<app-movie-info  [movie]="movie" [movieId]="movie.id" (onEdit)="showEditForm($event)" *ngIf="!editMode"></app-movie-info>
+<app-add-movie-form [mode]="'UPDATE'" [movieId]="movie.id" (onInfo)="changeEditMode($event)" *ngIf="editMode"></app-add-movie-form>

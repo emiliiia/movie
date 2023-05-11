@@ -1,0 +1,161 @@
+$assetPath :"/assets/siteStyle";
+
+.iconFavourite{
+  position: absolute;
+  margin-top: 100px;
+}
+
+.contentBody{
+  width: 1400px;
+  margin: auto;
+}
+
+.contentBody2{
+  width: 1400px;
+  margin: auto;
+}
+
+a{
+  color: #000000;
+}
+
+.cardP{
+  position: absolute;
+  margin-left: 300px;
+  width: 800px;
+  font-size: 24px;
+}
+
+mat-card {
+  box-shadow: 3px 3px #102d3a, -1em 0 .4em #007226;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+mat-card-content mat-icon {
+  display: none;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  z-index: 2;
+  margin-top: -15px;
+  position: absolute;
+}
+
+mat-card-content button {
+  display: none;
+  z-index: 2;
+  position: absolute;
+}
+
+mat-card-content:hover mat-icon{
+  display: block;
+}
+
+mat-card-content:hover button {
+  display: block;
+}
+
+mat-card-content:hover img{
+  opacity: 0.3;
+}
+.example-full-width {
+  width: 800px;
+  margin-top: 20px;
+}
+
+mat-card-content{
+  width: 100%;
+}
+
+mat-card-footer{
+  text-align: center;
+}
+
+.changeImg{
+  background-image: url("#{$assetPath}/list.png");
+  background-position: center;
+  border-radius: 1px;
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+}
+
+.changeImg2{
+  background-image: url("#{$assetPath}/table.png");
+  overflow: hidden;
+  background-position: center;
+  background-size: 55px 55px;
+}
+
+@media screen and (max-width: 800px) {
+  .example-full-width {
+    max-width: 400px;
+    margin-top: 10px;
+  }
+
+  .contentBody{
+    width: 800px;
+    margin: auto;
+  }
+
+  mat-card {
+    margin: 5px;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .example-full-width {
+    max-width: 300px;
+    margin-top: 10px;
+  }
+
+  .contentBody{
+    width: 600px;
+    margin: auto;
+  }
+
+  mat-card {
+    margin: 5px;
+    max-width: 300px;
+  }
+
+  .panel > div{
+    max-width: 550px;
+  }
+
+
+  .cardP{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  .example-full-width {
+    max-width: 50px;
+    margin-top: 10px;
+  }
+
+  .contentBody{
+    width: 100px;
+    margin: auto;
+  }
+
+  mat-card {
+    margin: 2px;
+    max-width: 50px;
+  }
+
+  mat-toolbar button {
+    display: none;
+  }
+
+  .panel > div{
+    max-width: 400px;
+  }
+
+  .cardP{
+    display: none;
+  }
+}

@@ -1,0 +1,33 @@
+form{
+  margin: auto;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+h1{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: rgba(255, 136, 65, 0.93);
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  form{
+    margin: auto;
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  form{
+    margin: auto;
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  form{
+    margin: auto;
+    width: 300px;
+  }
+}

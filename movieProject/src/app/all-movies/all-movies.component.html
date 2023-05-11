@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+<div class="content mat-app-background" style="width: 100%;">
+  <div class="search-bar mat-app-background" fxLayoutAlign="center">
+    <form class="example-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <input type="text"
+               placeholder="Search"
+               aria-label="Number"
+               matInput
+               [formControl]="searchForm.controls['myControl']"
+               [matAutocomplete]="auto">
+        <button type="submit" id="submit" matSuffix mat-icon-button matTooltip="Search" color="primary" aria-label="Search">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <div class="contentBody" style="width: 1300px" fxLayoutAlign="start">
+      <a><button style="height: 55px; width: 55px; background-color: rgba(255,255,255,0)" [ngClass]="{'changeImg2':bool, 'changeImg': !bool}" (click)="boolChange()" ></button></a>
+
+      <button routerLink="/add" *ngIf="!addMovieAccess" mat-icon-button matTooltip="Add new movie" color="primary" aria-label="Add new movie">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+      <button routerLink="/favourite" *ngIf="!favouriteAccess" mat-icon-button matTooltip="Favourite" color="primary" aria-label="Favourite">
+        <mat-icon>whatshot</mat-icon>
+      </button>
+
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="year">Year</th>
+          <th mat-sort-header="addedDate">Date</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <div class="contentBody" *ngIf="bool != false; else another"  fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+      <mat-card class="example-card" *ngFor="let item of sortedData">
+        <mat-card-content>
+          <button *ngIf="item.isFavourite == true && !favouriteAccess" (click)="deleteFavourite(item.id)" matSuffix mat-icon-button matTooltip="Delete Favourite" color="primary" aria-label="Delete Favourite">
+            <mat-icon>playlist_add_check</mat-icon>
+          </button>
+          <button *ngIf="item.isFavourite == false && !favouriteAccess" (click)="addFavourite(item.id)" matSuffix mat-icon-button matTooltip="Add Favourite" color="primary" aria-label="Add Favourite">
+            <mat-icon>playlist_add</mat-icon>
+          </button>
+          <mat-icon style="margin-top: 50%; margin-left: 90px; font-size: 72px; width: 72px; height: 72px;
+           cursor: pointer">play_circle_filled</mat-icon>
+          <a routerLink="/movie/{{item.id}}">
+          <img [src]="postImage + item.id + '.jpg'"  alt="">
+          </a>
+        </mat-card-content>
+        <a routerLink="/movie/{{item.id}}">
+        <mat-card-footer>
+          <mat-card-title>{{item.name}}</mat-card-title>
+        </mat-card-footer>
+        </a>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <ng-template  #another>
+      <div class="contentBody2" fxLayout="column wrap" fxLayoutAlign="space-between">
+        <mat-card style="margin-left: 100px"  *ngFor="let item of sortedData">
+          <a routerLink="/movie/{{item.id}}">
+          <mat-card-content>
+            <mat-icon>playlist_add</mat-icon>
+            <mat-icon style="margin-top: 50%; margin-left: 90px; font-size: 72px; width: 72px; height: 72px;
+           cursor: pointer">play_circle_filled</mat-icon>
+            <img [src]="postImage + item.id + '.jpg'"  alt="">
+          </mat-card-content>
+          </a>
+          <p class="cardP">
+            Name: {{item.name}}<br><br>
+            Year: {{item.year}}<br><br>
+            Box Office Fees: {{item.boxOfficeFees | roundNumber }}<br><br>
+            Country: {{item.country}}<br><br>
+          </p>
+        </mat-card>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="footer">
+    <p class="footerText">© 2022 LPP S.A., str. Lonkova 39/44, 80-769 Gdansk, Poland, NIP: 583‑10‑14‑898, REGON: 190852164<br>
+      House © 2023 All rights reserved</p>
+  </div>
+</div>
+
+
+

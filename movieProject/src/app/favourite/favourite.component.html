@@ -1,0 +1,87 @@
+<app-header></app-header>
+
+<div class="content mat-app-background" style="width: 100%; height: 100%">
+  <div class="search-bar mat-app-background" fxLayoutAlign="center">
+    <form class="example-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width" appearance="fill" formControlName="myControl">
+        <input type="text"
+               placeholder="Search"
+               aria-label="Number"
+               matInput
+               [formControl]="searchForm.controls['myControl']"
+               [matAutocomplete]="auto">
+        <button type="submit" id="submit" matSuffix mat-icon-button matTooltip="Search" color="primary" aria-label="Search">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+    <h1 class="iconFavourite"><mat-icon>whatshot</mat-icon> Favourite movies list</h1>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <div class="contentBody" style="width: 1300px; padding-top: 50px" fxLayoutAlign="start">
+      <a><button style="height: 55px; width: 55px; background-color: rgba(255,255,255,0)" [ngClass]="{'changeImg2':bool, 'changeImg': !bool}" (click)="boolChange()" ></button></a>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="name">Name</th>
+          <th mat-sort-header="year">Year</th>
+          <th mat-sort-header="addedDate">Date</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <div class="contentBody" *ngIf="bool != false; else another"  fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+      <mat-card class="example-card" *ngFor="let item of sortedData">
+          <mat-card-content>
+            <button (click)="deleteFavourite(item.id)" matSuffix mat-icon-button matTooltip="Delete Favourite" color="primary" aria-label="Delete Favourite">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <a routerLink="/movie/{{item.id}}">
+            <mat-icon style="margin-top: 50%; margin-left: 90px; font-size: 72px; width: 72px; height: 72px;
+           cursor: pointer">play_circle_filled</mat-icon>
+
+            <img [src]="postImage + item.id + '.jpg'"  alt="">
+            </a>
+          </mat-card-content>
+        <a routerLink="/movie/{{item.id}}">
+          <mat-card-footer>
+            <mat-card-title>{{item.name}}</mat-card-title>
+          </mat-card-footer>
+        </a>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="content mat-app-background" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+    <ng-template  #another>
+      <div class="contentBody2" fxLayout="column wrap" fxLayoutAlign="space-between">
+        <mat-card style="margin-left: 100px"  *ngFor="let item of sortedData">
+          <a routerLink="/movie/{{item.id}}">
+            <mat-card-content>
+              <mat-icon>playlist_add</mat-icon>
+              <mat-icon style="margin-top: 50%; margin-left: 90px; font-size: 72px; width: 72px; height: 72px;
+           cursor: pointer">play_circle_filled</mat-icon>
+              <img [src]="postImage + item.id + '.jpg'"  alt="">
+            </mat-card-content>
+          </a>
+          <p class="cardP">
+            Name: {{item.name}}<br><br>
+            Year: {{item.year}}<br><br>
+            Box Office Fees: {{item.boxOfficeFees}}<br><br>
+            Country: {{item.country}}<br><br>
+          </p>
+        </mat-card>
+      </div>
+    </ng-template>
+  </div>
+
+
+</div>

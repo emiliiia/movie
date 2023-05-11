@@ -1,0 +1,120 @@
+<app-header></app-header>
+
+<div class="content mat-app-background" style="width: 100%; height: 200%">
+  <h1 fxLayoutAlign="center">Movie {{mode}} mode</h1>
+  <form [formGroup]="movieFbForm" (ngSubmit)="onSubmit()" fxLayoutAlign="center" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div id="photo-picker">
+        <label for="photo">Photo</label>
+        <input type="file" name="photo" id="photo">
+        <div *ngIf="mode == 'CREATE'" class="error">Photo is required</div>
+      </div>
+
+      <div class="other-content" fxLayout="column">
+        <mat-form-field>
+          <mat-label>ID</mat-label>
+          <input matInput type="number" formControlName="id" placeholder="ID">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>NAME</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Name">
+          <mat-error class="error"
+                     *ngIf="movieFbForm.controls['name'].invalid  && movieFbForm.controls['name'].touched">Name is
+            required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>YEAR</mat-label>
+          <input matInput type="number" formControlName="year" placeholder="2000" min="1800" [max]="currentYear"
+                 step="1" >
+          <mat-error class="error"
+                     *ngIf="movieFbForm.controls['year'].invalid && movieFbForm.controls['year'].touched">Year is invalid
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>GENRE</mat-label>
+          <mat-select formControlName="genre">
+            <mat-option *ngFor="let option of genresList" [value]="option.value">{{option.label}}</mat-option>
+          </mat-select>
+          <mat-error class="error"
+                     *ngIf="movieFbForm.controls['genre'].invalid && movieFbForm.controls['genre'].touched">Genre is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+    </div>
+
+    <div formArrayName="cast">
+      <mat-label>CAST</mat-label>
+      <button mat-button color="accent"  type="button" (click)="addCast()">Add cast</button><br>
+      <mat-form-field *ngFor="let cast of cast.controls; let i = index"  style="margin-right: 50px">
+        <button mat-button color="accent" class="buttonSumbit" type="button" (click)="removeCast(i)">-</button>
+        <input  matInput [placeholder]="'Cast' + i+1" type="text" id="cast={{i}}" [formControlName]="i"
+                fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>BOX OFFICE FEES</mat-label>
+      <input matInput type="number" formControlName="boxOfficeFees" placeholder="0" min="0" step="1">
+      <mat-error class="error"
+                 *ngIf="movieFbForm.controls['boxOfficeFees'].invalid  && movieFbForm.controls['boxOfficeFees'].touched">
+        Box Office Fees is required and must be a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>COUNTRY</mat-label>
+      <input matInput #inputCountry maxlength="30" [type]="hide1 ? 'country' : 'text'" formControlName="country"
+             placeholder="Country">
+      <mat-hint align="end">{{inputCountry.value.length}}/30</mat-hint>
+      <mat-error class="error"
+                 *ngIf="movieFbForm.controls['country'].invalid  && movieFbForm.controls['country'].touched">
+        Country is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>COMPANY</mat-label>
+      <input matInput #inputCompany maxlength="20" [type]="hide2 ? 'company' : 'text'" formControlName="company"
+             placeholder="Company">
+      <mat-hint align="end">{{inputCompany.value.length}}/20</mat-hint>
+      <mat-error class="error"
+                 *ngIf="movieFbForm.controls['company'].invalid  && movieFbForm.controls['company'].touched">
+        Company is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>DIRECTOR</mat-label>
+      <input matInput #inputDirector maxlength="20" [type]="hide4 ? 'director' : 'text'"
+             formControlName="director" placeholder="Director">
+      <mat-hint align="end">{{inputDirector.value.length}}/20</mat-hint>
+      <mat-error class="error"
+                 *ngIf="movieFbForm.controls['director'].invalid  && movieFbForm.controls['director'].touched">
+        Director is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>DESCRIPTION</mat-label>
+      <textarea matInput #inputDescription maxlength="1000" [type]="hide3 ? 'description' : 'text'"
+                formControlName="description" placeholder="Description">
+              </textarea>
+      <mat-hint align="end">{{inputDescription.value.length}}/1000</mat-hint>
+      <mat-error class="error"
+                 *ngIf="movieFbForm.controls['description'].invalid  && movieFbForm.controls['description'].touched">
+        Company is required
+      </mat-error>
+    </mat-form-field>
+
+    <div id="buttons">
+      <button mat-raised-button color="accent" type="submit" class="btn" id="submit"
+              [disabled]="movieFbForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>

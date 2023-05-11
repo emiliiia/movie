@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <a routerLink="/">
+    <img src="assets/lightLogo.jpg" width="60px" alt="frog icon">
+  </a>
+  Breaking Movies
+  <div class="flex-stretch"></div>
+  <mat-icon style="margin-right: 9px; margin-top: 5px">wb_sunny</mat-icon>
+  <mat-slide-toggle [formControl]="toggleControl" class="mr-8"></mat-slide-toggle>
+  <mat-icon style="margin-right: 9px;">bedtime</mat-icon>
+
+  <button routerLink="/adminPage" *ngIf="isAdmin" mat-icon-button matTooltip="admin Page" color="primary" aria-label="Admin Page">
+    <mat-icon>supervised_user_circle</mat-icon>
+  </button>
+
+  <button routerLink="/authorization" mat-raised-button color="accent" *ngIf="logInBool == false">Sign in</button>
+  <button mat-raised-button color="accent" *ngIf="logInBool == true" (click)="logout()">Log out</button>
+  <button routerLink="/registration" mat-button color="#111" *ngIf="logInBool == false">Register</button>
+</mat-toolbar>
+

@@ -1,0 +1,35 @@
+<div id="login">
+  <div class="center">
+    <h1>Register</h1>
+    <form [formGroup]="userFbForm" (ngSubmit)="onSubmit()" fxLayoutAlign="center" fxLayout="column">
+        <mat-form-field>
+          <mat-label>NAME</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Name">
+          <mat-error *ngIf="userFbForm.controls['name'].invalid  && userFbForm.controls['name'].touched">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>PASSWORD</mat-label>
+          <input matInput #inputPassword maxlength="6" [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Password">
+          <mat-hint align="end">{{inputPassword.value.length}}/6</mat-hint>
+          <mat-error *ngIf="userFbForm.controls['password'].invalid  && userFbForm.controls['password'].touched">
+            Password is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="disablBool != false">
+          <mat-label>CONFIRM PASSWORD</mat-label>
+          <input matInput #inputConfirmPassword maxlength="6" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password">
+          <mat-hint align="end">{{inputConfirmPassword.value.length}}/6</mat-hint>
+          <mat-error *ngIf="userFbForm.controls['confirmPassword'].invalid  && userFbForm.controls['confirmPassword'].touched">
+            Confirm password is required</mat-error>
+        </mat-form-field>
+
+
+      <div class="inputbox">
+        <button mat-raised-button color="accent" type="submit" class="btn" id="submit"
+                [disabled]="userFbForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+

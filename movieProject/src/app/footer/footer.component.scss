@@ -1,0 +1,49 @@
+$assetPath :"/assets/siteStyle";
+
+.footer{
+  background-color: #042C2C;
+
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  margin: auto;
+  margin-top: 600px;
+
+  font-family: 'Baloo 2', cursive;
+  color: rgb(255, 255, 255);
+}
+
+#footerText{
+
+  font-size: 18px;
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    width: 800px;
+  }
+
+  #footerText{
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    width: 600px;
+  }
+
+  #footerText{
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    width: 500px;
+  }
+
+  #footerText{
+    width: 500px;
+  }
+}
